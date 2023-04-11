@@ -1,9 +1,21 @@
 import React from 'react';
 import './Gig.scss';
 import { Slider } from 'infinite-react-carousel/lib';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
 
 function Gig() {
+  const params = useParams();
+  console.log(params);
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ['gig'],
+    queryFn: () =>
+      newRequest.get(`/gigs/single/`).then((res) => {
+        return res.data;
+      }),
+  });
+
   return (
     <div className='gig'>
       <div className='container'>
