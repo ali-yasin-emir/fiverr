@@ -14,7 +14,7 @@ function Gig() {
         return res.data;
       }),
   });
-
+  const userId = data?.userId;
   const {
     isLoading: isLoadingUser,
     error: errorUser,
@@ -22,9 +22,10 @@ function Gig() {
   } = useQuery({
     queryKey: ['user'],
     queryFn: () =>
-      newRequest.get(`/users/${data.userId}`).then((res) => {
+      newRequest.get(`/users/${userId}`).then((res) => {
         return res.data;
       }),
+    enabled: !!userId,
   });
 
   return (
@@ -38,7 +39,7 @@ function Gig() {
           <div className='left'>
             <span className='breadcrumbs'>
               <Link className='link' to='/gigs?cat=design'>
-                Liverr
+                Fiverr
               </Link>
               {'>'} Graphics & Design {'>'}
             </span>
