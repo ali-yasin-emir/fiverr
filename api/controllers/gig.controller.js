@@ -3,7 +3,6 @@ import createError from '../utils/createError.js';
 export const createGig = async (req, res, next) => {
   if (!req.isSeller)
     return next(createError(403, 'Only sellers can create a gig!'));
-  // return res.status(403).send('Only sellers can create a gig!');
 
   const newGig = new Gig({
     userId: req.userId,
@@ -34,8 +33,8 @@ export const deleteGig = async (req, res, next) => {
 export const getGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
+    if (!gig) next(createError(404, 'Gig not found!'));
     res.status(200).send(gig);
-    if (!gig) return next(createError(404, 'Gig not found!'));
   } catch (err) {
     next(err);
   }
