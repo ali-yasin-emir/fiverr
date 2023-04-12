@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema(
   {
-    gidId: {
+    gigId: {
       type: String,
       required: true,
     },
