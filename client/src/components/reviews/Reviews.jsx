@@ -13,12 +13,16 @@ const Reviews = ({ gigId }) => {
   });
   return (
     <div className='reviews'>
-      <h2>Reviews</h2>
       {isLoading
         ? 'loading'
         : error
         ? 'Something went wrong'
-        : data.map((review) => <Review key={review._id} review={review} />)}
+        : data.map((review) => (
+            <>
+              <h2>Reviews</h2>
+              <Review key={review._id} review={review} />
+            </>
+          ))}
     </div>
   );
 };
