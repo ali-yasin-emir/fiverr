@@ -43,7 +43,7 @@ const Reviews = ({ gigId }) => {
           ))}
       <div className='add'>
         <h3>Add a review</h3>
-        <form action='' onSubmit={handleSubmit}>
+        <form className='addform' action='' onSubmit={handleSubmit}>
           <input type='text' placeholder='write your opinion' />
           <select name='' id=''>
             <option value={1}>1</option>
