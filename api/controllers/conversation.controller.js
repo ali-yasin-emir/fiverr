@@ -22,7 +22,7 @@ export const updateConversation = async (req, res, next) => {
       {
         id: req.params.id,
       },
-      { $set: { readBySeller: req.isSeller, readByBuyer: !req.isSeller } },
+      { $set: { readBySeller: true, readByBuyer: true } },
       { new: true }
     );
     res.status(200).send(updatedConversation);

@@ -1,4 +1,3 @@
-import React from 'react';
 import './Reviews.scss';
 import Review from '../review/Review';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -15,7 +14,7 @@ const Reviews = ({ gigId }) => {
 
   const mutation = useMutation({
     mutationFn: (review) => {
-      return newRequest.post('/reviews', review);
+      return newRequestequest.post('/reviews', review);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['reviews']);
