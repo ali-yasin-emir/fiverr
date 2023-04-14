@@ -10,7 +10,7 @@ const Message = () => {
           <Link className='link' to='/messages'>
             Messages
           </Link>
-          {' > John Doe > '}
+          {'<'} John Doe {'>'}
         </span>
         <div className='messages'>
           <div className='item'>
