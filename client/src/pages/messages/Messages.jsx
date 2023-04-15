@@ -6,7 +6,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -55,9 +54,10 @@ const Messages = () => {
               <tbody key={c.id}>
                 <tr
                   className={
-                    ((currentUser.isSeller ? !c.readBySeller : undefined) ||
-                      (!currentUser.isSeller ? !c.readByBuyer : undefined)) &&
-                    'active'
+                    (currentUser.isSeller ? !c.readBySeller : undefined) ||
+                    (!currentUser.isSeller ? !c.readByBuyer : undefined)
+                      ? 'active'
+                      : undefined
                   }
                 >
                   <td>{currentUser.isSeller ? c.buyerId : c.sellerId}</td>
