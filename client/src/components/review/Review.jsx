@@ -9,6 +9,7 @@ const Review = ({ review }) => {
         return res.data;
       }),
   });
+
   return (
     <div className='review'>
       {isLoading ? (

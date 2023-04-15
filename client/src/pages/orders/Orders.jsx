@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './Orders.scss';
 import { useQuery } from '@tanstack/react-query';
-import newRequest from '../../utils/newRequest';
+import newRequest from '../../utils/newRequest.js';
 
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -27,25 +26,29 @@ const Orders = () => {
             <h1>Orders</h1>
           </div>
           <table>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>{currentUser.isSeller ? 'Buyer' : 'Seller'}</th>
-              <th>Contact</th>
-            </tr>
-            {data.map((order) => (
-              <tr key={order._id}>
-                <td>
-                  <img className='image' src={order.img} alt='' />
-                </td>
-                <td>{order.title}</td>
-                <td>{order.price}</td>
-                <td>Maria Anders</td>
-                <td>
-                  <img className='message' src='./img/message.png' alt='' />
-                </td>
+            <tbody>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>{currentUser.isSeller ? 'Buyer' : 'Seller'}</th>
+                <th>Contact</th>
               </tr>
+            </tbody>
+            {data.map((order) => (
+              <tbody key={order._id}>
+                <tr>
+                  <td>
+                    <img className='image' src={order.img} alt='' />
+                  </td>
+                  <td>{order.title}</td>
+                  <td>{order.price}</td>
+                  <td>Maria Anders</td>
+                  <td>
+                    <img className='message' src='./img/message.png' alt='' />
+                  </td>
+                </tr>
+              </tbody>
             ))}
           </table>
         </div>
