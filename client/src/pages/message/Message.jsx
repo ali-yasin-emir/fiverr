@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import './Message.scss';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 const Message = () => {
   const { id } = useParams();
@@ -13,6 +13,25 @@ const Message = () => {
         return res.data;
       }),
   });
+
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return newRequest.post(`/messages`, message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['messages']);
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate({
+      conversationId: id,
+      desc: e.target[0].value,
+    });
+    e.target[0].value = '';
+  };
+
   return (
     <div className='message'>
       <div className='container'>
@@ -40,10 +59,10 @@ const Message = () => {
           </div>
         )}
         <hr />
-        <div className='write'>
+        <form onSubmit={handleSubmit} className='write'>
           <textarea type='text' placeholder='write a message' />
-          <button>Send</button>
-        </div>
+          <button type='submit'>Send</button>
+        </form>
       </div>
     </div>
   );
