@@ -3,6 +3,8 @@ import './Message.scss';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 const Message = () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
   const { id } = useParams();
   const queryClient = useQueryClient();
 
@@ -48,7 +50,10 @@ const Message = () => {
         ) : (
           <div className='messages'>
             {data.map((m) => (
-              <div key={m._id} className='item'>
+              <div
+                key={m._id}
+                className={m.userId === currentUser._id ? 'owner item' : 'item'}
+              >
                 <img
                   src='https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600'
                   alt=''
